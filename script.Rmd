@@ -1,0 +1,33 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Carregar bibliotecas usadas
+```{r message=FALSE, warning=FALSE}
+
+library(tidyverse)
+library(readr)
+```
+
+Leitura dos arquivos. 
+
+Fonte: [Sucupira - CAPES](https://sucupira.capes.gov.br/sucupira/public/consultas/coleta/veiculoPublicacaoQualis/listaConsultaGeralPeriodicos.jsf)
+```{r}
+qualis_2010_2012 <- readr::read_delim("data/classificacoes_2010-2012.xls", 
+    "\t", escape_double = FALSE, locale = locale(encoding = "ISO-8859-1"), 
+    trim_ws = TRUE)
+View(qualis_2010_2012)
+
+qualis_2013_2016 <- readr::read_delim("data/classificacoes_2013-2016.xls", 
+    "\t", escape_double = FALSE, locale = locale(encoding = "ISO-8859-1"), 
+    trim_ws = TRUE)
+View(qualis_2013_2016)
+```
+
+
+
