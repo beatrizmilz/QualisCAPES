@@ -42,14 +42,26 @@ ui <- dashboardPage(skin = "black",
                   )), 
                 
                 box(
-                    sliderTextInput(
+                    #sliderTextInput(
+                    #inputId = "estrato_i",
+                    #label = "Escolha a classificação no periódicos CAPES",
+                    #choices = sort(unique(qualis_capes$estrato)),
+                    #selected = c("A1", "C"),
+                   #grid = TRUE
+                  #)
+                  
+                  
+                  selectInput(
                     inputId = "estrato_i",
                     label = "Escolha a classificação no periódicos CAPES",
-                   choices = sort(unique(qualis_capes$estrato)),
-                   selected = c("A1", "C"),
-                   grid = TRUE
+                    choices = sort(unique(qualis_capes$estrato)),
+                    multiple = TRUE,
+                    selected = sort(unique(qualis_capes$estrato))
                   )
-                ) # caixa em uma linha
+                  
+                  # , verbatimTextOutput(outputId = "result")
+                
+                  ) # caixa em uma linha
               ),
               
               # Adiciona a tabela
@@ -79,7 +91,7 @@ server <- function(input, output) {
   
   filtered_data <- reactive({
    qualis_capes <- qualis_capes %>%
-    #filter(estrato %in% input$estrato_i) %>% # isso ta dando erro no codigo
+    filter(estrato %in% input$estrato_i) %>% # isso ta dando erro no codigo
      filter(area_de_avaliacao %in% input$area_de_avaliacao_i) %>% 
      arrange(estrato) %>% 
      rename(ISSN = issn,
@@ -96,7 +108,7 @@ server <- function(input, output) {
     filtered_data() 
     } , escape = FALSE)
   
-  
+  output$result <- renderPrint(str(input$estrato_i))
 }
 
 shinyApp(ui, server)
