@@ -19,9 +19,9 @@ Fonte: [Sucupira - CAPES](https://sucupira.capes.gov.br/sucupira/public/consulta
 
 
 ```{r message=FALSE, warning=FALSE}
-qualis_2010_2012 <- readr::read_delim("data/capes/classificacoes_2010-2012.xls", 
-    "\t", escape_double = FALSE, locale = locale(encoding = "ISO-8859-1"), 
-    trim_ws = TRUE)
+#qualis_2010_2012 <- readr::read_delim("data/capes/classificacoes_2010-2012.xls", 
+#    "\t", escape_double = FALSE, locale = locale(encoding = "ISO-8859-1"), 
+#    trim_ws = TRUE)
 
 
 qualis_2013_2016 <- readr::read_delim("data/capes/classificacoes_2013-2016.xls", 
@@ -33,7 +33,7 @@ qualis_2013_2016 <- readr::read_delim("data/capes/classificacoes_2013-2016.xls",
 
 Renomear as colunas
 ```{r}
-qualis_2010_2012 <- janitor::clean_names(qualis_2010_2012)
+#qualis_2010_2012 <- janitor::clean_names(qualis_2010_2012)
 
 
 qualis_2013_2016 <- janitor::clean_names(qualis_2013_2016)
@@ -43,7 +43,7 @@ qualis_2013_2016 <- janitor::clean_names(qualis_2013_2016)
 
 Adicionar a coluna da avaliação
 ```{r}
-qualis_2010_2012$avaliacao <- "2010-2012"
+#qualis_2010_2012$avaliacao <- "2010-2012"
 
 qualis_2013_2016$avaliacao <- "2013-2016"
 ```
@@ -52,8 +52,16 @@ qualis_2013_2016$avaliacao <- "2013-2016"
 Juntar em um único dataframe
 
 ```{r}
-qualis_capes <- dplyr::bind_rows(qualis_2010_2012,qualis_2013_2016)
+qualis_capes <- dplyr::bind_rows(
+  #qualis_2010_2012,
+  qualis_2013_2016)
 ```
+
+```{r}
+qualis_capes$estrato <- as.factor(qualis_capes$estrato)
+```
+
+
 
 Salvar em um arquivo .rds
 ```{r}
