@@ -207,9 +207,10 @@ qualis_2013_2016 &lt;- readr::read_delim(&quot;data/classificacoes_2013-2016.xls
     &quot;\t&quot;, escape_double = FALSE, locale = locale(encoding = &quot;ISO-8859-1&quot;), 
     trim_ws = TRUE)</code></pre>
 <p>Renomear as colunas</p>
-<pre class="r"><code>qualis_2010_2012 &lt;- qualis_2010_2012 %&gt;% rename(issn = ISSN, titulo = `Título`, area_de_avaliacao = `Área de Avaliação`, estrato = Estrato)
+<pre class="r"><code>qualis_2010_2012 &lt;- janitor::clean_names(qualis_2010_2012)
 
-qualis_2013_2016 &lt;- qualis_2013_2016 %&gt;% rename(issn = ISSN, titulo = `Título`, area_de_avaliacao = `Área de Avaliação`, estrato = Estrato)</code></pre>
+
+qualis_2013_2016 &lt;- janitor::clean_names(qualis_2013_2016)</code></pre>
 <p>Adicionar a coluna da avaliação</p>
 <pre class="r"><code>qualis_2010_2012$avaliacao &lt;- &quot;2010-2012&quot;
 
@@ -218,6 +219,8 @@ qualis_2013_2016$avaliacao &lt;- &quot;2013-2016&quot;</code></pre>
 <pre class="r"><code>qualis_capes &lt;- dplyr::bind_rows(qualis_2010_2012,qualis_2013_2016)</code></pre>
 <p>Salvar em um arquivo .rds</p>
 <pre class="r"><code>write_rds(qualis_capes, &quot;output/qualis_capes.rds&quot;)</code></pre>
+<p>Contar quantos periódicos estão na base:</p>
+<pre class="r"><code>issn &lt;- unique(qualis_capes$issn)</code></pre>
 
 
 

@@ -9,7 +9,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Carregar bibliotecas usadas
 ```{r message=FALSE, warning=FALSE}
-
 library(tidyverse)
 library(readr)
 ```
@@ -34,10 +33,12 @@ qualis_2013_2016 <- readr::read_delim("data/classificacoes_2013-2016.xls",
 
 Renomear as colunas
 ```{r}
-qualis_2010_2012 <- qualis_2010_2012 %>% rename(issn = ISSN, titulo = `Título`, area_de_avaliacao = `Área de Avaliação`, estrato = Estrato)
+qualis_2010_2012 <- janitor::clean_names(qualis_2010_2012)
 
-qualis_2013_2016 <- qualis_2013_2016 %>% rename(issn = ISSN, titulo = `Título`, area_de_avaliacao = `Área de Avaliação`, estrato = Estrato)
+
+qualis_2013_2016 <- janitor::clean_names(qualis_2013_2016)
 ```
+
 
 
 Adicionar a coluna da avaliação
@@ -57,5 +58,11 @@ qualis_capes <- dplyr::bind_rows(qualis_2010_2012,qualis_2013_2016)
 Salvar em um arquivo .rds
 ```{r}
 write_rds(qualis_capes, "output/qualis_capes.rds")
+```
+
+
+Contar quantos periódicos estão na base:
+```{r}
+issn <- unique(qualis_capes$issn)
 ```
 
