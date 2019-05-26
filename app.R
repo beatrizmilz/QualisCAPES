@@ -91,7 +91,7 @@ server <- function(input, output) {
   
   filtered_data <- reactive({
    qualis_capes <- qualis_capes %>%
-    filter(estrato %in% input$estrato_i) %>% # isso ta dando erro no codigo
+    filter(estrato %in% input$estrato_i) %>%
      filter(area_de_avaliacao %in% input$area_de_avaliacao_i) %>% 
      arrange(estrato) %>% 
      rename(ISSN = issn,
