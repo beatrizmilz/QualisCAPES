@@ -25,7 +25,13 @@ ui <- dashboardPage(
               # Colocar aqui o conteúdo da página da pesquisa
               h2("Pesquisa de periódicos"),
                fluidRow( #uma linha
-                box(), #caixa em uma linha
+                box(#caixa em uma linha
+                  selectInput(
+                    inputId = "area_de_avaliacao",
+                    label = "Área de Avaliação",
+                    choices =  unique(qualis_capes$area_de_avaliacao),  
+                    multiple = TRUE
+                  )), 
                 
                 box() # caixa em uma linha
               )
