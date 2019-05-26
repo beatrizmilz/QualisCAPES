@@ -2,8 +2,9 @@ library(shiny)
 library(DT)
 library(shinyWidgets)
 library(shinydashboard)
+library(tidyverse)
 
-qualis_capes <- read_rds("output/qualis_capes.rds")
+qualis_capes <- readr::read_rds("output/qualis_capes.rds")
 
 ui <- dashboardPage(
   
@@ -26,6 +27,8 @@ ui <- dashboardPage(
       tabItem(tabName = "dashboard",
               # Colocar aqui o conteúdo da página da pesquisa
               h2("Pesquisa de periódicos"),
+              strong("O filtro ainda não está funcionando como deveria! Em construção."),
+              br(),br(),
                fluidRow( #uma linha
                 box(#caixa em uma linha
                   pickerInput(
@@ -38,8 +41,7 @@ ui <- dashboardPage(
                   )), 
                 
                 box(
-                  
-                  sliderTextInput(
+                    sliderTextInput(
                     inputId = "estrato_i",
                     label = "Escolha a classificação no periódicos CAPES",
                    choices = sort(unique(qualis_capes$estrato)),
@@ -76,8 +78,8 @@ server <- function(input, output) {
   
   filtered_data <- reactive({
    qualis_capes <- qualis_capes %>%
-     filter(estrato %in% input$estrato_i) %>% 
-     filter(area_de_avaliacao %in% input$area_de_avaliacao_i) %>% 
+     filter(estrato %in% input$estrato_i & 
+              area_de_avaliacao %in% input$area_de_avaliacao_i) %>% 
      arrange(estrato) %>% 
      rename(ISSN = issn,
             `Título` = titulo,
