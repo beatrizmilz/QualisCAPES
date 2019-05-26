@@ -1,4 +1,5 @@
 library(shiny)
+library(DT)
 library(shinydashboard)
 
 qualis_capes <- read_rds("output/qualis_capes.rds")
@@ -29,12 +30,23 @@ ui <- dashboardPage(
                   selectInput(
                     inputId = "area_de_avaliacao",
                     label = "Área de Avaliação",
-                    choices =  unique(qualis_capes$area_de_avaliacao),  
+                    choices =  sort(unique(qualis_capes$area_de_avaliacao)),  
                     multiple = TRUE
                   )), 
                 
-                box() # caixa em uma linha
-              )
+                box(
+                  
+                  selectInput(
+                    inputId = "slider_estrato",
+                    label = "Escolha a classificação no periódicos CAPES",
+                   choices = sort(unique(qualis_capes$estrato)),
+                   multiple = TRUE
+                  )
+                ) # caixa em uma linha
+              ),
+              
+              # Adiciona a tabela
+                DTOutput("resultado_pesquisa")
       ),
       
       # Tab do projeto
