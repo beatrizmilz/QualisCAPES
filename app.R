@@ -6,12 +6,13 @@ library(tidyverse)
 
 qualis_capes <- readr::read_rds("output/qualis_capes.rds")
 
-ui <- dashboardPage(
+ui <- dashboardPage(skin = "black",
   
   # Título
   dashboardHeader(title = "Pesquisa de periódicos", titleWidth = 260),
   ## Conteúdo da sidebar
   dashboardSidebar(
+    width = 260,
     sidebarMenu(
       menuItem("Pesquisa de Periódicos", tabName = "dashboard", icon = icon("search")),
       menuItem("Sobre o projeto", tabName = "sobre", icon = icon("graduation-cap")),
@@ -37,7 +38,7 @@ ui <- dashboardPage(
                     choices =  sort(unique(qualis_capes$area_de_avaliacao)), 
                     options = list(`actions-box` = TRUE),
                     multiple = TRUE,
-                    selected = TRUE
+                    selected = sort(unique(qualis_capes$area_de_avaliacao))
                   )), 
                 
                 box(
