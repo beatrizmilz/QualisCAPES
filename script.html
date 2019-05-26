@@ -198,12 +198,12 @@ $(document).ready(function () {
 library(readr)</code></pre>
 <p>Leitura dos arquivos.</p>
 <p>Fonte: <a href="https://sucupira.capes.gov.br/sucupira/public/consultas/coleta/veiculoPublicacaoQualis/listaConsultaGeralPeriodicos.jsf">Sucupira - CAPES</a></p>
-<pre class="r"><code>qualis_2010_2012 &lt;- readr::read_delim(&quot;data/classificacoes_2010-2012.xls&quot;, 
+<pre class="r"><code>qualis_2010_2012 &lt;- readr::read_delim(&quot;data/capes/classificacoes_2010-2012.xls&quot;, 
     &quot;\t&quot;, escape_double = FALSE, locale = locale(encoding = &quot;ISO-8859-1&quot;), 
     trim_ws = TRUE)
 
 
-qualis_2013_2016 &lt;- readr::read_delim(&quot;data/classificacoes_2013-2016.xls&quot;, 
+qualis_2013_2016 &lt;- readr::read_delim(&quot;data/capes/classificacoes_2013-2016.xls&quot;, 
     &quot;\t&quot;, escape_double = FALSE, locale = locale(encoding = &quot;ISO-8859-1&quot;), 
     trim_ws = TRUE)</code></pre>
 <p>Renomear as colunas</p>
