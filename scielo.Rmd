@@ -1,0 +1,23 @@
+---
+title: "Tratando os dados da Scielo"
+author: "Beatriz MIlz"
+date: "26 de maio de 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readr)
+journals_scielo <- read_csv("data/scielo/journals-Sun-26-May-2019-18_44_31.csv") %>% 
+  janitor::clean_names()
+```
+
+```{r}
+teste <- left_join(qualis_capes, journals_scielo, by = c("titulo" = "periodicos"))
+```
+
+
+Não resulta no que preciso, pois a tabela do scielo não contém o ISSN
