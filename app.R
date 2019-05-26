@@ -56,12 +56,14 @@ ui <- dashboardPage(
       # Tab do projeto
       tabItem(tabName = "sobre",
               # Colocar aqui a parte do projeto
-              h2("Sobre o projeto")
+              h2("Sobre o projeto"),
+              "Em breve"
       ),
       # Tab do github  
       tabItem(tabName = "github",
               # Colocar aqui a parte do projeto
-              h2("Acesse o código")
+              h2("Acesse o código"),
+              "Em breve"
       )
       
     )
