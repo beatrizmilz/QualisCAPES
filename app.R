@@ -28,8 +28,7 @@ ui <- dashboardPage(skin = "black",
                         tabItem(tabName = "dashboard",
                                 # Colocar aqui o conteúdo da página da pesquisa
                                 h2("Pesquisa de periódicos"),
-                                strong("O filtro ainda não está funcionando como deveria! Em construção."),
-                                br(),br(),
+                               
                                 fluidRow( #uma linha
                                   box(#caixa em uma linha
                                     selectizeInput(
@@ -50,7 +49,9 @@ ui <- dashboardPage(skin = "black",
                                     
                                   ) # caixa em uma linha
                                 ),
-                                
+                                #adiciona os value boxes
+                                valueBoxOutput("n_total_periodicos", width = 4), 
+                                valueBoxOutput("n_periodicos_filtrados", width = 4), 
                                 # Adiciona a tabela
                                 DTOutput("tabela_periodicos")
                         ),
@@ -95,12 +96,7 @@ server <- function(input, output) {
       ungroup() %>% 
       filtra_varios(input$area_de_avaliacao_i) %>% 
       filter(area_de_avaliacao %in% input$area_de_avaliacao_i)  %>% 
-      arrange(issn) %>%
-      rename(ISSN = issn,
-             `Título` = titulo,
-             `Área de Avaliação` = area_de_avaliacao,
-             Estrato = estrato,
-             `Áreas em que o periódico foi avaliado` = area_conc) 
+      arrange(issn)
     
     
     qualis_capes2
@@ -108,8 +104,31 @@ server <- function(input, output) {
     
   })
   
+  output$n_total_periodicos <- renderValueBox({
+    valueBox(
+      value = length(unique(qualis_capes$issn)),
+      subtitle =  "Número de periódicos cadastrados",
+      icon = icon("fas fa-running"), #icone nao ta funcionando
+      color = "blue"
+    )
+  })
+  
+  output$n_periodicos_filtrados <- renderValueBox({
+    valueBox(
+      value = length(unique(filtered_data()$issn)),
+      subtitle =  "Número de periódicos filtrados",
+      icon = icon("fas fa-running"), #icone nao ta funcionando
+      color = "blue"
+    )
+  })
+  
   output$tabela_periodicos <- renderDT({
-    filtered_data() 
+    filtered_data()  %>%
+      rename(ISSN = issn,
+             `Título` = titulo,
+             `Área de Avaliação` = area_de_avaliacao,
+             Estrato = estrato,
+             `Áreas em que o periódico foi avaliado` = area_conc) 
   } , escape = FALSE)
   
 }
