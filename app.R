@@ -15,8 +15,12 @@ ui <- dashboardPage(skin = "black",
                       width = 260,
                       sidebarMenu(
                         menuItem("Pesquisa de Periódicos", tabName = "dashboard", icon = icon("search")),
-                        menuItem("Sobre o projeto", tabName = "sobre", icon = icon("graduation-cap")),
-                        menuItem(" Acesse o código", tabName = "github", icon = icon("github-square"))
+                        menuItem("Saiba mais", tabName = "sobre", icon = icon("graduation-cap")),
+                        menuItem("   Acesse o código", 
+                                 href = "https://github.com/beatrizmilz/QualisCAPES",
+                                 icon = icon("github-square")
+                                 
+                        )
                       )
                     ),
                     
@@ -28,12 +32,15 @@ ui <- dashboardPage(skin = "black",
                         tabItem(tabName = "dashboard",
                                 # Colocar aqui o conteúdo da página da pesquisa
                                 h2("Pesquisa de periódicos"),
-                               
+                                "Essa página foi elaborada com a intenção de facilitar a pesquisa de periódicos para publicação em grupos multi e interdisciplinares. É possível consultar as áreas de avaliação dos programas de pós-graduação no", 
+                                tags$a(href = "http://avaliacaoquadrienal.capes.gov.br/resultado-da-avaliacao-quadrienal-2017-2", "Site da CAPES"),
+                                ".", 
+                                br(), br(),
                                 fluidRow( #uma linha
                                   box(#caixa em uma linha
                                     selectizeInput(
                                       inputId = "area_de_avaliacao_i",
-                                      label = "Área de Avaliação",
+                                      label = "Selecione a(s) Área(s) de Avaliação",
                                       choices =  sort(unique(qualis_capes$area_de_avaliacao)), 
                                       multiple = TRUE,
                                       selected = FALSE
@@ -59,16 +66,9 @@ ui <- dashboardPage(skin = "black",
                         # Tab do projeto
                         tabItem(tabName = "sobre",
                                 # Colocar aqui a parte do projeto
-                                h2("Sobre o projeto"),
-                                "Em breve"
-                        ),
-                        # Tab do github  
-                        tabItem(tabName = "github",
-                                # Colocar aqui a parte do projeto
-                                h2("Acesse o código"),
+                                h2("Sobre esse shiny app"),
                                 "Em breve"
                         )
-                        
                       )
                     )
 )
@@ -124,11 +124,16 @@ server <- function(input, output) {
   
   output$tabela_periodicos <- renderDT({
     filtered_data()  %>%
+      select(-area_conc) %>% 
+      mutate(link = 
+               paste0("<a href='https://www.google.com/search?q=issn%20",
+                      issn, "%20-%20", titulo, "', target='_blank' /> Saiba mais </a>")) %>% 
       rename(ISSN = issn,
-             `Título` = titulo,
+             `Título do Periódico` = titulo,
              `Área de Avaliação` = area_de_avaliacao,
-             Estrato = estrato,
-             `Áreas em que o periódico foi avaliado` = area_conc) 
+             `Estrato CAPES` = estrato,
+             `Pesquisa externa` = link) 
+    
   } , escape = FALSE)
   
 }
