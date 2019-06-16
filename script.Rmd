@@ -9,8 +9,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Carregar bibliotecas usadas
 ```{r message=FALSE, warning=FALSE}
-library(tidyverse)
 library(readr)
+library(janitor)
 ```
 
 Leitura dos arquivos. 
@@ -19,59 +19,33 @@ Fonte: [Sucupira - CAPES](https://sucupira.capes.gov.br/sucupira/public/consulta
 
 
 ```{r message=FALSE, warning=FALSE}
-#qualis_2010_2012 <- readr::read_delim("data/capes/classificacoes_2010-2012.xls", 
-#    "\t", escape_double = FALSE, locale = locale(encoding = "ISO-8859-1"), 
-#    trim_ws = TRUE)
-
-
-qualis_2013_2016 <- readr::read_delim("data/capes/classificacoes_2013-2016.xls", 
+qualis_capes <- readr::read_delim("data/capes/classificacoes_2013-2016.xls", 
     "\t", escape_double = FALSE, locale = locale(encoding = "ISO-8859-1"), 
     trim_ws = TRUE)
-
 ```
 
 
 Renomear as colunas
 ```{r}
-#qualis_2010_2012 <- janitor::clean_names(qualis_2010_2012)
-
-
-qualis_2013_2016 <- janitor::clean_names(qualis_2013_2016)
+qualis_capes <- janitor::clean_names(qualis_capes)
 ```
 
 
-
-Adicionar a coluna da avaliação
 ```{r}
-#qualis_2010_2012$avaliacao <- "2010-2012"
-
-qualis_2013_2016$avaliacao <- "2013-2016"
-```
-
-
-Juntar em um único dataframe
-
-```{r}
-qualis_capes <- dplyr::bind_rows(
-  #qualis_2010_2012,
-  qualis_2013_2016)
-```
-
-```{r}
-qualis_capes$estrato <- as.factor(qualis_capes$estrato)
+qualis_capes$estrato <- base::as.factor(qualis_capes$estrato)
 ```
 
 
 
 Salvar em um arquivo .rds
 ```{r}
-write_rds(qualis_capes, "output/qualis_capes.rds")
+readr::write_rds(qualis_capes, "output/qualis_capes.rds")
 ```
 
 
 Contar quantos periódicos estão na base:
 ```{r}
-issn <- unique(qualis_capes$issn)
-
+issn <- base::unique(qualis_capes$issn)
+length(issn)
 ```
 

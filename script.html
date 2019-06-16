@@ -194,36 +194,22 @@ $(document).ready(function () {
 
 
 <p>Carregar bibliotecas usadas</p>
-<pre class="r"><code>library(tidyverse)
-library(readr)</code></pre>
+<pre class="r"><code>library(readr)
+library(janitor)</code></pre>
 <p>Leitura dos arquivos.</p>
 <p>Fonte: <a href="https://sucupira.capes.gov.br/sucupira/public/consultas/coleta/veiculoPublicacaoQualis/listaConsultaGeralPeriodicos.jsf">Sucupira - CAPES</a></p>
-<pre class="r"><code>#qualis_2010_2012 &lt;- readr::read_delim(&quot;data/capes/classificacoes_2010-2012.xls&quot;, 
-#    &quot;\t&quot;, escape_double = FALSE, locale = locale(encoding = &quot;ISO-8859-1&quot;), 
-#    trim_ws = TRUE)
-
-
-qualis_2013_2016 &lt;- readr::read_delim(&quot;data/capes/classificacoes_2013-2016.xls&quot;, 
+<pre class="r"><code>qualis_capes &lt;- readr::read_delim(&quot;data/capes/classificacoes_2013-2016.xls&quot;, 
     &quot;\t&quot;, escape_double = FALSE, locale = locale(encoding = &quot;ISO-8859-1&quot;), 
     trim_ws = TRUE)</code></pre>
 <p>Renomear as colunas</p>
-<pre class="r"><code>#qualis_2010_2012 &lt;- janitor::clean_names(qualis_2010_2012)
-
-
-qualis_2013_2016 &lt;- janitor::clean_names(qualis_2013_2016)</code></pre>
-<p>Adicionar a coluna da avaliação</p>
-<pre class="r"><code>#qualis_2010_2012$avaliacao &lt;- &quot;2010-2012&quot;
-
-qualis_2013_2016$avaliacao &lt;- &quot;2013-2016&quot;</code></pre>
-<p>Juntar em um único dataframe</p>
-<pre class="r"><code>qualis_capes &lt;- dplyr::bind_rows(
-  #qualis_2010_2012,
-  qualis_2013_2016)</code></pre>
-<pre class="r"><code>qualis_capes$estrato &lt;- as.factor(qualis_capes$estrato)</code></pre>
+<pre class="r"><code>qualis_capes &lt;- janitor::clean_names(qualis_capes)</code></pre>
+<pre class="r"><code>qualis_capes$estrato &lt;- base::as.factor(qualis_capes$estrato)</code></pre>
 <p>Salvar em um arquivo .rds</p>
-<pre class="r"><code>write_rds(qualis_capes, &quot;output/qualis_capes.rds&quot;)</code></pre>
+<pre class="r"><code>readr::write_rds(qualis_capes, &quot;output/qualis_capes.rds&quot;)</code></pre>
 <p>Contar quantos periódicos estão na base:</p>
-<pre class="r"><code>issn &lt;- unique(qualis_capes$issn)</code></pre>
+<pre class="r"><code>issn &lt;- base::unique(qualis_capes$issn)
+length(issn)</code></pre>
+<pre><code>## [1] 27619</code></pre>
 
 
 
