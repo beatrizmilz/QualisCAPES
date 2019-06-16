@@ -1,0 +1,23 @@
+.logo {background-color: #FFFFFF;
+      color: #333 !important  ;
+      }
+      
+      
+.main-sidebar {background-color: #7fc2c1 !important;
+              }
+      
+.skin-black .sidebar a {
+    color: #333 ;
+}
+      
+.skin-black .sidebar-menu>li.active>a, .skin-black .sidebar-menu>li:hover>a {
+  background-color: #008f95 ;
+}
+
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #333;
+
+}
