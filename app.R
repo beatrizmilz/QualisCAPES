@@ -34,7 +34,9 @@ ui <- dashboardPage(skin = "black",
                           tabItem(tabName = "dashboard",
                                   # Colocar aqui o conteúdo da página da pesquisa
                               
-                                  "Essa página foi elaborada com a intenção de facilitar a pesquisa de periódicos para publicação em grupos multi e interdisciplinares. É possível consultar as áreas de avaliação dos programas de pós-graduação no site da", 
+                                  "Essa página foi elaborada com a intenção de facilitar a pesquisa de periódicos para publicação em grupos multi e interdisciplinares.", 
+                                  br(), br(),
+                                  "É possível consultar as áreas de avaliação dos programas de pós-graduação no site da", 
                                   tags$a(href = "http://avaliacaoquadrienal.capes.gov.br/resultado-da-avaliacao-quadrienal-2017-2", "CAPES"),
                                   ".", 
                                   br(), br(),
@@ -68,8 +70,73 @@ ui <- dashboardPage(skin = "black",
                           # Tab do projeto
                           tabItem(tabName = "sobre",
                                   # Colocar aqui a parte do projeto
-                                  h2("Sobre esse shiny app"),
-                                  "Em breve"
+                                  h2("Sobre esse Shiny App"),
+                                  "- Essa página foi elaborada com a intenção de facilitar 
+                                  a pesquisa de periódicos para publicação em grupos multi e interdisciplinares. 
+                                  Os dados foram obtidos no website da ",
+                                  tags$a(href = "https://sucupira.capes.gov.br/sucupira/public/consultas/coleta/veiculoPublicacaoQualis/listaConsultaGeralPeriodicos.jsf", "CAPES"),
+                                  ".",
+                                  
+                                  br(),br(),
+                                  
+                                  "- A idéia deste Shiny App surgiu a partir de uma conversa com o ",
+                                  tags$a(href = "https://github.com/GustavoOPinto", "Gustavo Oliveira Pinto"),
+                                  ", no evento ",
+                                  tags$a(href = "http://ser.uff.br/", "IV SER - IV Internacional Seminar on Statistics with R."),
+                                  br(),br(),
+                                  
+                                  "- Desenvolvido utilizando:",
+                                  tags$a(href = "https://www.r-project.org/", "R"), ",",
+                                  tags$a(href = "https://www.rstudio.com/", "RStudio"), ",",
+                                  tags$a(href = "https://shinyapps.io", "Shinyapps.io"), ",",
+                                  "e os pacotes",
+                                  tags$a(href = "https://shiny.rstudio.com/", "shiny"), ",",
+                                  tags$a(href = "https://rstudio.github.io/shinydashboard/", "shinydashboard"), ",",
+                                  tags$a(href = "https://dreamrs.github.io/shinyWidgets/index.html", "shinyWidgets"), ",",
+                                  tags$a(href = "https://rstudio.github.io/DT/", "DT"), ",",
+                                  tags$a(href = "https://www.tidyverse.org/", "tidyverse"), ",",
+                                  tags$a(href = "https://www.tidyverse.org/", "dplyr"), ",",
+                                  tags$a(href = "https://purrr.tidyverse.org", "purrr"), "e",
+                                  tags$a(href = "https://stringr.tidyverse.org/", "stringr"), ".",
+                                 
+                                  br(),
+                                 
+                                  
+                                  br(),
+                                  
+                                  "-", tags$strong("Agradecimentos especiais"),  "para a equipe da",
+                                  tags$a(href = "https://www.curso-r.com/", "Curso-R"),
+                                  ", e ao",
+                                  tags$a(href = "https://github.com/jtrecenti", "Julio Trecenti"),
+                                  "e ",
+                                  tags$a(href = "https://github.com/williamorim", "William Amorim"),
+                                  "pela ajuda com o código do filtro usado.",
+                                  
+                                  br(),br(),
+                                  "-", tags$strong("Agradecimentos"),  "para:",
+                                  tags$a(href = "https://github.com/daattali/shiny-mini-workshop", "Dean Attali - Shiny mini Workshop"),
+                                  "e",
+                                  tags$a(href = "https://www.curso-r.com/cursos/dashboards/", "Curso-R - Curso de Dashboards com R"), ".",
+                                  
+                                  br(),
+                                  
+                                  
+                                  br(),
+                                  
+                                  "- Desenvolvido por",
+                                  tags$a(href = "https://beatrizmilz.com", "Beatriz Milz"),
+                                  "(Bolsista FAPESP - Processo Nº 18/23771-6). Pesquisadora no projeto FAPESP MacroAmb - Governança Ambiental da Macrometrópole Paulista face à variabilidade climática - Processo Nº	15/03804-9.",
+                                  br(), br(),
+                                  HTML("
+                                       <center>
+                                    
+                                       <img src='https://macroambforum.com.br/wp-content/uploads/2018/07/cropped-logo_MA_color.jpg'  width = '100px' alt = 'Logo Projeto Macroamb' border = '1'>
+                                       
+                                       </center>
+                                       ")
+
+                                  
+                                 
                           )
                         )
                       )
