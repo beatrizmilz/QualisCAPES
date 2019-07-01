@@ -194,14 +194,15 @@ ui <- dashboardPage(skin = "black",
                       output$tabela_periodicos <- renderDT({
                         filtered_data()  %>%
                           select(-area_conc) %>% 
-                          mutate(link = 
+                          mutate(titulo = 
                                    paste0("<a href='https://www.google.com/search?q=issn%20",
-                                          issn, "%20-%20", titulo, "', target='_blank' /> Saiba mais </a>")) %>% 
+                                          issn, "%20-%20", titulo, "', target='_blank' />", titulo, "</a>")) %>% 
                           rename(ISSN = issn,
                                  `Título do Periódico` = titulo,
                                  `Área de Avaliação` = area_de_avaliacao,
-                                 `Estrato CAPES` = estrato,
-                                 `Pesquisa externa` = link) 
+                                 `Estrato CAPES` = estrato#,
+                               #  `Pesquisa externa` = link
+                                 ) 
                         
                       } , escape = FALSE)
                       
